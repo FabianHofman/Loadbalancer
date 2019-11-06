@@ -13,7 +13,7 @@ namespace BaseAlgorithms
 
         public virtual Server GetServer(List<Server> servers)
         {
-            if (currentIndex == servers.Count() - 1) currentIndex = 0;
+            if (currentIndex >= servers.Count() - 1) currentIndex = 0;
             else currentIndex++;
             return servers[currentIndex];
         }
