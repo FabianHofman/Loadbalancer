@@ -6,47 +6,46 @@
         xmlns:local="clr-namespace:Loadbalancer"
         xmlns:converter="clr-namespace:Loadbalancer.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="900" Background="#FFDFDFDF" MinWidth="640" MinHeight="500"
-        ResizeMode="NoResize">
+        Title="Loadbalancer" Height="550" Width="900" Background="#FFDFDFDF" MinWidth="900" MinHeight="550">
     <Window.Resources>
         <converter:BoolToOppositeBoolConverter x:Key="oppositeConverter" />
     </Window.Resources>
     <Grid Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="Auto" MinWidth="274"/>
+            <ColumnDefinition Width="Auto" MinWidth="303"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <ListBox x:Name="Log" ItemsSource="{Binding Log}" Margin="10,10,10,35"/>
             <Button x:Name="ClearLogButton" Command="{Binding Path=ClearLogCommand}" Content="Clear log" Margin="10,0,104,10" VerticalAlignment="Bottom" Height="20" Background="#FFAFD2F0"/>
-            <Button x:Name="ReloadAlgosButton" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}"  Command="{Binding Path=ReloadAlgos}" Content="Reload algos" Margin="519,0,10,10" VerticalAlignment="Bottom" Height="20"/>
+            <Button x:Name="ReloadAlgosButton" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}"  Command="{Binding Path=ReloadAlgos}" Content="Reload algos" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="20"/>
         </Grid>
         <Grid Grid.Column="1">
-            <Button x:Name="StartStopButton" Command="{Binding Path=StartStopLoadbalancerCommand}" Content="Start/stop Loadbalancer" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="145" Height="46" Background="#FFAFD2F0"/>
+            <Button x:Name="StartStopButton" Command="{Binding Path=StartStopLoadbalancerCommand}" Content="Start/stop Loadbalancer" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="283" Height="46" Background="#FFAFD2F0"/>
 
-            <Label Content="proxy port" Margin="0,56,145,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
-            <TextBox x:Name="ProxyPort" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource oppositeConverter}}" PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,61,10,0" TextWrapping="Wrap" Text="{Binding Path=LoadbalancerPort}" VerticalAlignment="Top" Width="135"/>
+            <Label Content="loadbalancer port" Margin="0,56,174,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
+            <TextBox x:Name="LoadbalancerPort" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource oppositeConverter}}" PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,61,10,0" TextWrapping="Wrap" Text="{Binding Path=LoadbalancerPort}" VerticalAlignment="Top" Width="159"/>
 
-            <Label Content="health check interval" Margin="0,82,145,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
-            <TextBox x:Name="CacheTimeOutInSeconds" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource oppositeConverter}}" PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,86,10,0" TextWrapping="Wrap" Text="{Binding Path=LoadbalancerHealthCheckInterval}" VerticalAlignment="Top" Width="135"/>
+            <Label Content="health check interval" Margin="0,82,174,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
+            <TextBox x:Name="CacheTimeOutInSeconds" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource oppositeConverter}}" PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,86,10,0" TextWrapping="Wrap" Text="{Binding Path=LoadbalancerHealthCheckInterval}" VerticalAlignment="Top" Width="159"/>
 
-            <Label Content="buffersize (in)" Margin="0,107,145,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
-            <TextBox x:Name="BufferSize" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource oppositeConverter}}"  PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,111,10,0" TextWrapping="Wrap" Text="{Binding Path=LoadbalancerBufferSize}" VerticalAlignment="Top" Width="135"/>
+            <Label Content="buffersize" Margin="0,107,174,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
+            <TextBox x:Name="BufferSize" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource oppositeConverter}}"  PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,111,10,0" TextWrapping="Wrap" Text="{Binding Path=LoadbalancerBufferSize}" VerticalAlignment="Top" Width="159"/>
 
-            <Label Content="algorithm" Margin="0,133,145,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" RenderTransformOrigin="0.087,0.5"/>
-            <ComboBox IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}"  ItemsSource="{Binding Path=Algorithms}" SelectedValue="{Binding SelectedAlgorithmString}" SelectedValuePath="Content" x:Name="AlgorithmList" HorizontalAlignment="Left" Margin="129,138,0,0" VerticalAlignment="Top" Width="135" />
+            <Label Content="algorithm" Margin="0,133,174,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" RenderTransformOrigin="0.087,0.5"/>
+            <ComboBox IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}"  ItemsSource="{Binding Path=Algorithms}" SelectedValue="{Binding SelectedAlgorithmString}" SelectedValuePath="Content" x:Name="AlgorithmList" HorizontalAlignment="Left" Margin="134,138,0,0" VerticalAlignment="Top" Width="159" />
 
-            <Label Content="Server list" Margin="0,191,203,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
+            <Label Content="Server list" Margin="0,191,232,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
             <ListBox x:Name="ServerList" ItemsSource="{Binding Path=ServerList}" SelectedItem="{Binding SelectedServer, Mode=OneWay}" Margin="10,217,10,91"/>
 
-            <Label Content="Server IP" Margin="0,430,208,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
-            <TextBox x:Name="AddServerIP" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}" HorizontalAlignment="Right" Height="20" Margin="0,456,144,0" TextWrapping="Wrap" Text="{Binding AddServerIP}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Server IP" Margin="0,0,237,55" Height="26" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="AddServerIP" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}" HorizontalAlignment="Right" Height="20" Margin="0,0,163,35" TextWrapping="Wrap" Text="{Binding AddServerIP}" VerticalAlignment="Bottom" Width="130" RenderTransformOrigin="0.092,0.7"/>
 
-            <Label Content="Server Port" Margin="0,430,62,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right"/>
-            <TextBox x:Name="AddServerPort" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}"  PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,456,10,0" TextWrapping="Wrap" Text="{Binding AddServerPort}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Server Port" Margin="0,0,77,55" Height="26" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="AddServerPort" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}"  PreviewTextInput="CheckIfNumber" HorizontalAlignment="Right" Height="20" Margin="0,0,10,35" TextWrapping="Wrap" Text="{Binding AddServerPort}" VerticalAlignment="Bottom" Width="135"/>
 
-            <Button x:Name="AddServer" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}" Command="{Binding AddServer}" Content="Add" Margin="10,0,144,10" VerticalAlignment="Bottom" Height="20" Background="#FF89EA84"/>
-            <Button x:Name="RemoveServer" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}" Command="{Binding Path=RemoveServer, Mode=OneWay}" CommandParameter="{Binding ElementName=ServerList, Path=SelectedItem, Mode=OneWay}" Content="Remove" Margin="144,0,10,10" VerticalAlignment="Bottom" Height="20" Background="#FFF76E6E"/>
+            <Button x:Name="AddServer" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}" Command="{Binding AddServer}" Content="Add" Margin="10,0,163,10" VerticalAlignment="Bottom" Height="20" Background="#FF89EA84"/>
+            <Button x:Name="RemoveServer" IsEnabled="{Binding IsRunning, Converter={StaticResource oppositeConverter}}" Command="{Binding Path=RemoveServer, Mode=OneWay}" CommandParameter="{Binding ElementName=ServerList, Path=SelectedItem, Mode=OneWay}" Content="Remove" Margin="158,0,10,10" VerticalAlignment="Bottom" Height="20" Background="#FFF76E6E"/>
 
 
 
