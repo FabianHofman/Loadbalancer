@@ -242,7 +242,20 @@ namespace Loadbalancer.Loadbalancer
                             SetSession(incomingClient, selectedServer);
                         }
 
-                        await incomingClientStream.WriteAsync(responseBytes, 0, responseBytes.Length);
+                        int offset = 0;
+
+                        while(offset < responseBytes.Length)
+                        {
+                            if (BufferSize < responseBytes.Length && BufferSize < responseBytes.Length - offset)
+                            {
+                                await incomingClientStream.WriteAsync(responseBytes, offset, BufferSize);
+                            } else
+                            {
+                                await incomingClientStream.WriteAsync(responseBytes, offset, responseBytes.Length - offset);
+                            }
+                            
+                            offset += BufferSize;
+                        }
                         
                         AddToLog($"Using server: {selectedServer.Host}:{selectedServer.Port}");
 

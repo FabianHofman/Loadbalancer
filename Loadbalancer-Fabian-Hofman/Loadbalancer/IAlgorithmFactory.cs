@@ -42,7 +42,7 @@ namespace Loadbalancer.Loadbalancer
             Type tAlgo = typeof(IAlgorithm);
             List<string> lstClasses = new List<string>();
 
-            string path = @"D:\School\NotS\Loadbalancer-Fabian-Hofman\Loadbalancer-Fabian-Hofman\Loadbalancer\Algos";
+            string path = @"D:\School\Lesjaar 3\NotS\WIN\Beroepsproducten\Loadbalancer\Loadbalancer-Fabian-Hofman\Loadbalancer\Algos";
             string[] dlls = Directory.GetFiles(path, "*.dll");
             List<Assembly> assemblies = new List<Assembly>();
 
