@@ -27,7 +27,7 @@ namespace Loadbalancer.Loadbalancer
             builder.AppendLine($"Host: {Host}");
             builder.AppendLine("Connection: close");
             builder.AppendLine();
-            var header = Encoding.ASCII.GetBytes(builder.ToString());
+            byte[] header = Encoding.ASCII.GetBytes(builder.ToString());
 
             try
             {
